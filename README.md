@@ -1,24 +1,23 @@
 
-Application created by [ThinkJS](http://www.thinkjs.org)
-
-## Install dependencies
-
+### 基础数据定义
+1、对象型
 ```
-npm install
+{
+    "errno": 0,     //0为成功，非0为失败，如1004
+    "errmsg": "",   //一般在失败时才会有
+    "data": {}      //数据
+}
 ```
-
-## Start server
-
+2、数组型
 ```
-npm start
-```
-
-## Deploy with pm2
-
-Use pm2 to deploy app on production enviroment.
-
-```
-pm2 startOrReload pm2.json
+{
+    "errno": 0,     //0为成功，非0为失败，如1004
+    "errmsg": "",   //一般在失败时才会有
+    "data": {       //数据
+        "list":[],  //数据列表
+        "total":0   //数据总数---分页的时候存在
+    }      
+}
 ```
 
 ### 获取三行诗列表
