@@ -30,7 +30,7 @@ method:GET
 | --------   | -----:  | :----:  |
 | page     | 否 |   页码：从1开始     |
 | pageSize       |   否   |   单页数量   |
-```json
+```
 {
     "errno": 0,
     "errmsg": "",
