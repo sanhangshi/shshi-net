@@ -2,7 +2,7 @@
  * @Author: Yun.Lei
  * @Date: 2019-04-29 12:19:21
  * @Last Modified by: Yun.Lei
- * @Last Modified time: 2019-04-29 16:16:51
+ * @Last Modified time: 2019-04-29 17:56:02
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
@@ -15,8 +15,8 @@ module.exports = class extends Base {
     async getListAction(){
       if(this.isGet){
         let params = {
-          page : this.get("page")||1,
-          pageSize : this.get("pageSize")||5
+          page : this.get("page")||config.DEF_PAGE,
+          pageSize : this.get("pageSize")||config.DEF_PAGE_SIZE
         }
         let shi = this.model("user");
         let data = await shi.getList(params);

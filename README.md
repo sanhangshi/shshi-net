@@ -1,8 +1,9 @@
 ## 目录
 1. <a href="#1">基础数据定义</a>
 2. <a href="#2">获取三行诗列表</a>
-3. <a href="#3">用户注册</a>
-3. <a href="#4">用户列表</a>
+3. <a href="#3">发布三行诗</a>
+4. <a href="#3">用户注册</a>
+5. <a href="#4">用户列表</a>
 
 
 ### <a name="1">基础数据定义</a>
@@ -35,29 +36,54 @@ method:GET
 | --------   | -----:  | :----:  |
 | page     | 否 |   页码：从1开始     |
 | pageSize       |   否   |   单页数量   |
-```
+```json
 {
     "errno": 0,
     "errmsg": "",
     "data": {
         "list": [
             {
-                "id": 2,    //id
-                "title": "六月八日",    //标题
-                "author": "武汉大学",   //作者--来源
-                "content": "螃蟹在剥我的壳，笔记本在写我。\r\n漫天的我落在枫叶上雪花上。\r\n而你在想我。",  //诗歌内容
-                "createBy": "leiyun",   //创建人
-                "caeateTime": 1556464345,   //创建时间
-                "tagId": 1,     //分类ID
-                "remark": "也许世界颠覆，你才会想我吧"  //创建者备注--感想--读后感等
+                "id": 2,    
+                "title": "六月八日",    
+                "author": "武汉大学",   
+                "content": "螃蟹在剥我的壳，笔记本在写我。\r\n漫天的我落在枫叶上雪花上。\r\n而你在想我。",  
+                "createBy": "leiyun",   
+                "caeateTime": 1556464345,  
+                "tagId": 1,    
+                "remark": "也许世界颠覆，你才会想我吧" ,
+                "createUserId": 1
             }
         ],
-        "total": 1      //总数，分页之类的自己算
+        "total": 1      
+    }
+}
+```
+### <a name="3">发布三行诗</a>
+```
+url:/index/addPoetry
+method:POST
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| title     | 否 |   标题     |
+| author       |   否   |   作者   |
+| content       |   是   |   内容   |
+| createBy       |   是   |   创建人   |
+| createUserId       |   是   |   创建人ID   |
+| tagId       |   是   |   分类ID   |
+| remark       |   否   |   备注   |
+| caeateTime       |   否   |   创建时间   |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {
+        "id": 3
     }
 }
 ```
 
-### <a name="3">用户注册</a>
+### <a name="4">用户注册</a>
 ```
 url:/user/register
 method:POST
@@ -78,7 +104,7 @@ method:POST
     }
 }
 ```
-### <a name="4">用户列表</a>
+### <a name="5">用户列表</a>
 ```
 url:/user/getList
 method:GET
