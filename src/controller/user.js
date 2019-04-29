@@ -2,7 +2,7 @@
  * @Author: Yun.Lei
  * @Date: 2019-04-29 12:19:21
  * @Last Modified by: Yun.Lei
- * @Last Modified time: 2019-04-29 15:51:56
+ * @Last Modified time: 2019-04-29 16:16:51
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
@@ -13,12 +13,24 @@ module.exports = class extends Base {
     }
 
     async getListAction(){
-      let shi = this.model("user");
-      let data = await shi.getList();
-      this.success({
-        list:data.data,
-        total:data.count
-      })
+      if(this.isGet){
+        let params = {
+          page : this.get("page")||1,
+          pageSize : this.get("pageSize")||5
+        }
+        let shi = this.model("user");
+        let data = await shi.getList(params);
+        data.data.map(item=>{
+          delete item["password"];
+        })
+        this.success({
+          list:data.data,
+          total:data.count
+        })
+      }else{
+        this.status = 404;
+      }
+      
     }
 
     async registerAction() {
