@@ -2,7 +2,7 @@
  * @Author: Yun.Lei
  * @Date: 2019-04-29 12:19:21
  * @Last Modified by: Yun.Lei
- * @Last Modified time: 2019-04-29 17:55:44
+ * @Last Modified time: 2019-04-29 18:24:45
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
@@ -27,6 +27,21 @@ module.exports = class extends Base {
         } else {
             this.status = 404;
         }
+    }
+
+    async getPoetryAction(){
+      if(this.isGet){
+        let id= this.get("poetryId")||0;
+        let shiModel = this.model("shi");
+        let poetry = await shiModel.getPoetry(id);
+        if(think.isEmpty(poetry)){
+          this.fail(config.BASE_ERROE_CODE, "没有对应ID的数据", {});
+        }else{
+          this.success(poetry);
+        }
+      }else{
+        this.status = 404;
+      }
     }
 
     async addPoetryAction() {

@@ -2,8 +2,9 @@
 1. <a href="#1">基础数据定义</a>
 2. <a href="#2">获取三行诗列表</a>
 3. <a href="#3">发布三行诗</a>
-4. <a href="#3">用户注册</a>
-5. <a href="#4">用户列表</a>
+4. <a href="#4">用户注册</a>
+5. <a href="#5">用户列表</a>
+6. <a href="#6">获取某一条诗</a>
 
 
 ### <a name="1">基础数据定义</a>
@@ -129,6 +130,31 @@ method:GET
             }
         ],
         "total": 6
+    }
+}
+```
+### <a name="6">获取某一条诗</a>
+```
+url:/user/getPoetry
+method:GET
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| poetryId     | 否 |   诗歌ID，传0或者不传随机获取，传非0或者去指定诗歌内容     |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {
+        "id": 4,
+        "title": "标题",
+        "author": "作者",
+        "content": "内容",
+        "createBy": "创建人",
+        "caeateTime": 1556530890,
+        "tagId": 1,
+        "remark": "备注",
+        "createUserId": 2
     }
 }
 ```
