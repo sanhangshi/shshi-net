@@ -50,3 +50,25 @@ method:GET
     }
 }
 ```
+
+### 用户注册
+```
+url:/user/register
+method:POST
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| userName     | 是 |   用户名    |
+| password       |   是   |   密码   |
+| nickName       |   是   |   昵称   |
+| signature       |   否   |   个性签名   |
+| avatar       |   否   |   头像   |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {
+        "id": 5
+    }
+}
+```

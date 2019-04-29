@@ -1,3 +1,9 @@
+/*
+ * @Author: Yun.Lei 
+ * @Date: 2019-04-29 12:19:21 
+ * @Last Modified by: Yun.Lei
+ * @Last Modified time: 2019-04-29 15:30:32
+ */
 const Base = require('./base.js');
 const config = require('../config/config.js');
 
@@ -13,6 +19,5 @@ module.exports = class extends Base {
       list:data.data,
       total:data.count
     })
-    // this.fail(config.BASE_ERROE_CODE,"暂无相关数据",{})
   }
 };
