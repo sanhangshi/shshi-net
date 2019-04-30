@@ -1,7 +1,7 @@
 ## 目录
 <a href="#1">基础数据定义</a><br/>
-[用户相关](https://github.com/sanhangshi/shshi-net/blob/master/USER.md)<br/>
-[诗歌相关](https://github.com/sanhangshi/shshi-net/blob/master/POETRY.md)<br/>
+[用户相关](https://github.com/sanhangshi/shshi-net/blob/master/doc/USER.md)<br/>
+[诗歌相关](https://github.com/sanhangshi/shshi-net/blob/master/doc/POETRY.md)<br/>
 
 
 ### <a name="1">基础数据定义</a>
