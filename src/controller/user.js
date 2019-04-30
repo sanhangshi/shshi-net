@@ -2,7 +2,7 @@
  * @Author: Yun.Lei
  * @Date: 2019-04-29 12:19:21
  * @Last Modified by: Yun.Lei
- * @Last Modified time: 2019-04-30 17:53:14
+ * @Last Modified time: 2019-04-30 18:27:12
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
@@ -16,7 +16,6 @@ module.exports = class extends Base {
       if(this.isPost){
         let name = this.post("userName");
         let password = this.post("password");
-        let errorMsg = [];
         if(!name||!password){
           this.fail(config.BASE_ERROE_CODE,"账户或密码不能为空",{});
         }else{
@@ -103,5 +102,25 @@ module.exports = class extends Base {
         } else {
             this.status = 404;
         }
+    }
+
+    async getUserInfoAction(){
+      if(this.isGet){
+        let id = this.get("id");
+        if(!id){
+          this.fail(config.BASE_ERROE_CODE,"id为必传",{});
+        }else{
+          let userModel = this.model("user");
+          let user = await userModel.getUser(id);
+          if(think.isEmpty(user)){
+            this.fail(config.BASE_ERROE_CODE,"暂无对应用户信息，请检查id是否正确",{});
+          }else{
+            this.success(user)
+          }
+        }
+        
+      }else{
+        this.status = 404;
+      }
     }
 };

@@ -10,4 +10,12 @@ module.exports = class extends think.Model {
         const result = await this.where({userName:user.userName}).thenAdd(user);
         return result
     }
+
+    async getUser(id){
+        let user = await this.where({id:id}).find();
+        if(!think.isEmpty){
+            delete user["password"];
+        }
+        return user;
+    }
 };
