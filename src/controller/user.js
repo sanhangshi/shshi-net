@@ -2,7 +2,7 @@
  * @Author: Yun.Lei
  * @Date: 2019-04-29 12:19:21
  * @Last Modified by: Yun.Lei
- * @Last Modified time: 2019-04-29 17:56:02
+ * @Last Modified time: 2019-04-30 17:53:14
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
@@ -10,6 +10,34 @@ const config = require("../config/config.js");
 module.exports = class extends Base {
     indexAction() {
         return this.display();
+    }
+
+    async loginAction(){
+      if(this.isPost){
+        let name = this.post("userName");
+        let password = this.post("password");
+        let errorMsg = [];
+        if(!name||!password){
+          this.fail(config.BASE_ERROE_CODE,"账户或密码不能为空",{});
+        }else{
+          let userModel = this.model("user");
+          let user = await userModel.where({userName:name}).find();
+          if(think.isEmpty(user)){
+            this.fail(config.BASE_ERROE_CODE,"账户或密码错误",{});
+          }else{
+            if(password!==user.password){
+              this.fail(config.BASE_ERROE_CODE,"账户或密码错误",{});
+            }else{
+              delete user["password"];
+              this.success(user);
+            }
+          }
+        }
+        
+        
+      }else{
+        this.status = 404;
+      }
     }
 
     async getListAction(){
