@@ -56,6 +56,8 @@ module.exports = class extends Base {
     async getListAction() {
         if (this.isGet) {
             let params = {
+                tagId:this.get("tagId")||"",
+                keyword:this.get("keyword")||"",
                 page: this.get("page") || config.DEF_PAGE,
                 pageSize: this.get("pageSize") || config.DEF_PAGE_SIZE
             }

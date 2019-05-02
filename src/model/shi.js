@@ -2,7 +2,19 @@ module.exports = class extends think.Model {
 
 
     async getList(params){
-       let list = await this.page(params.page,params.pageSize).countSelect();
+        let list = [];
+        if(!params.tagId&&!params.keyword){
+            list = await this.page(params.page,params.pageSize).countSelect();
+        }else{
+            let where = {};
+            if(params.tagId){
+                where.tagId=params.tagId;
+            }
+            if(params.keyword){
+                where['title|content']=['like',`%${params.keyword}%`];
+            }
+            list = await this.where(where).page(params.page,params.pageSize).countSelect();
+        }
        console.log(list)
        return list;
     }
