@@ -123,4 +123,20 @@ module.exports = class extends Base {
         this.status = 404;
       }
     }
+
+    async getDefAvatarAction(){
+      if(this.isGet){
+        let avatarModel = this.model("avatar");
+        let list = await avatarModel.getDefAvatar();
+        let avatarList = [];
+        list.map(item=>{
+          avatarList.push(item.img);
+        })
+        this.success({
+          list:avatarList
+        })
+      }else{
+        this.status = 404;
+      }
+    }
 };

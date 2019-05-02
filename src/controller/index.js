@@ -14,12 +14,51 @@ module.exports = class extends Base {
         return this.display();
     }
 
+    async addTypeAction() {
+        if (this.isPost) {
+            let type = this.post("typeName");
+            if (!type) {
+                this.fail(config.BASE_ERROE_CODE, "分类不能为空", {});
+            } else {
+                let typeModel = this.model("poetrytype");
+
+                let res = await typeModel.where({
+                    type: type
+                }).thenAdd({
+                    type: type
+                });
+                if (res.type == "exist") {
+                    this.fail(config.BASE_ERROE_CODE, "分类已存在", {});
+                } else {
+                    this.success({
+                        id: res.id
+                    });
+                }
+            }
+
+        } else {
+            this.status = 404;
+        }
+    }
+
+    async getTypeListAction() {
+        if (this.isGet) {
+            let typeModel = this.model("poetrytype");
+            let typeList = await typeModel.getTypeList();
+            this.success({
+                list: typeList
+            })
+        } else {
+            this.status = 404;
+        }
+    }
+
     async getListAction() {
         if (this.isGet) {
-          let params = {
-            page : this.get("page")||config.DEF_PAGE,
-            pageSize : this.get("pageSize")||config.DEF_PAGE_SIZE
-          }
+            let params = {
+                page: this.get("page") || config.DEF_PAGE,
+                pageSize: this.get("pageSize") || config.DEF_PAGE_SIZE
+            }
             let shi = this.model("shi");
             let data = await shi.getList(params);
             this.success({
@@ -31,19 +70,19 @@ module.exports = class extends Base {
         }
     }
 
-    async getPoetryAction(){
-      if(this.isGet){
-        let id= this.get("poetryId")||0;
-        let shiModel = this.model("shi");
-        let poetry = await shiModel.getPoetry(id);
-        if(think.isEmpty(poetry)){
-          this.fail(config.BASE_ERROE_CODE, "没有对应ID的数据", {});
-        }else{
-          this.success(poetry);
+    async getPoetryAction() {
+        if (this.isGet) {
+            let id = this.get("poetryId") || 0;
+            let shiModel = this.model("shi");
+            let poetry = await shiModel.getPoetry(id);
+            if (think.isEmpty(poetry)) {
+                this.fail(config.BASE_ERROE_CODE, "没有对应ID的数据", {});
+            } else {
+                this.success(poetry);
+            }
+        } else {
+            this.status = 404;
         }
-      }else{
-        this.status = 404;
-      }
     }
 
     async addPoetryAction() {
@@ -53,7 +92,7 @@ module.exports = class extends Base {
                 author: this.post("author"),
                 content: this.post("content"),
                 createBy: this.post("createBy"),
-                caeateTime: this.post("caeateTime")||dayjs().unix(),
+                caeateTime: this.post("caeateTime") || dayjs().unix(),
                 tagId: this.post("tagId"),
                 remark: this.post("remark"),
                 createUserId: this.post("createUserId")

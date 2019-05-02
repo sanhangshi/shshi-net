@@ -2,6 +2,7 @@
 <a href="#1">获取三行诗列表</a><br/>
 <a href="#2">发布三行诗</a><br/>
 <a href="#3">获取某一条诗</a><br/>
+<a href="#4">获取是个分类</a><br/>
 
 ### <a name="1">发布三行诗</a>
 ```
@@ -62,7 +63,7 @@ method:GET
 
 ### <a name="3">获取某一条诗</a>
 ```
-url:/user/getPoetry
+url:/index/getPoetry
 method:GET
 ```
 | 参数        | 是否必传  |  含义  |
@@ -83,5 +84,45 @@ method:GET
         "remark": "备注",
         "createUserId": 2
     }
+}
+```
+### <a name="4">获取三行诗分类</a>
+```
+url:/index/getTypeList
+method:GET
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| **     | 否 |   *    |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {
+        "id": 4,
+        "title": "标题",
+        "author": "作者",
+        "content": "内容",
+        "createBy": "创建人",
+        "caeateTime": 1556530890,
+        "tagId": 1,
+        "remark": "备注",
+        "createUserId": 2
+    }
+}
+```
+### <a name="5">增加一个分类</a>
+```
+url:/index/addType
+method:POST
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| typeName| 是 |   分类名称   |
+```json
+{
+    "errno": 1004,
+    "errmsg": "分类已存在",
+    "data": {}
 }
 ```
