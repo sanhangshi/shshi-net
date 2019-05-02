@@ -6,6 +6,8 @@
  */
 const Base = require("./base.js");
 const config = require("../config/config.js");
+import dayjs from 'dayjs';
+
 
 module.exports = class extends Base {
     indexAction() {
@@ -51,7 +53,7 @@ module.exports = class extends Base {
                 author: this.post("author"),
                 content: this.post("content"),
                 createBy: this.post("createBy"),
-                caeateTime: this.post("caeateTime"),
+                caeateTime: this.post("caeateTime")||dayjs().unix(),
                 tagId: this.post("tagId"),
                 remark: this.post("remark"),
                 createUserId: this.post("createUserId")

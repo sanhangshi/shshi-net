@@ -39,7 +39,7 @@ exports.model = {
     database: 'shshi',
     prefix: '',
     encoding: 'utf8',
-    host: '127.0.0.1',
+    host: '192.144.176.30',
     port: '3306',
     user: 'root',
     password: 'root',
