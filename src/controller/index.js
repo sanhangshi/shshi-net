@@ -80,6 +80,15 @@ module.exports = class extends Base {
             if (think.isEmpty(poetry)) {
                 this.fail(config.BASE_ERROE_CODE, "没有对应ID的数据", {});
             } else {
+                let commentModel = this.model('poetrycomment');
+                let list = await commentModel.getCommentList(poetry.id);
+                list.map(item=>{
+                    delete item['userName'];
+                    delete item['password'];
+                    delete item['signature'];
+                    delete item['registerTime'];
+                })
+                poetry.comments = list;
                 this.success(poetry);
             }
         } else {
@@ -122,6 +131,38 @@ module.exports = class extends Base {
                 });
             }
         } else {
+            this.status = 404;
+        }
+    }
+
+    async addCommentAction(){
+        if(this.isPost){
+            let params = {
+                comment:this.post("comment"),
+                poetryId:this.post("poetryId"),
+                userId:this.post("userId"),
+                addTime:dayjs().unix()
+            }
+            let errorMsg=[];
+            if(!params.userId){
+                errorMsg.push("userId为必传");
+            }
+            if(!params.comment){
+                errorMsg.push("comment为必传");
+            }
+            if(!params.poetryId){
+                errorMsg.push("poetryId为必传")
+            }
+            if(errorMsg.length){
+                this.fail(config.BASE_ERROE_CODE, errorMsg.join("、"), {});
+            }else{
+                let commentModel = this.model("poetrycomment");
+                let id = await commentModel.add(params);
+                this.success({
+                    id:id
+                })
+            }
+        }else{
             this.status = 404;
         }
     }

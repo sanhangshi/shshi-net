@@ -2,7 +2,9 @@
 <a href="#1">获取三行诗列表</a><br/>
 <a href="#2">发布三行诗</a><br/>
 <a href="#3">获取某一条诗</a><br/>
-<a href="#4">获取是个分类</a><br/>
+<a href="#4">获取诗歌分类</a><br/>
+<a href="#5">新增一个分类</a><br/>
+<a href="#6">新增一条评论</a><br/>
 
 ### <a name="1">发布三行诗</a>
 ```
@@ -76,15 +78,26 @@ method:GET
     "errno": 0,
     "errmsg": "",
     "data": {
-        "id": 4,
-        "title": "标题",
-        "author": "作者",
-        "content": "内容",
-        "createBy": "创建人",
-        "caeateTime": 1556530890,
+        "id": 3,
+        "title": "六月八日",
+        "author": "佚名",
+        "content": "笔停，铃响\n一张试卷卷走了三年的时光\n谁回头问我，今天考完了，还要回班么？",
+        "createBy": "三行诗测试号",
+        "caeateTime": 1556772622,
         "tagId": 1,
-        "remark": "备注",
-        "createUserId": 2
+        "remark": "唯美三行诗——现代美",
+        "comments": [
+            {
+                "id": 3,
+                "comment": "测试评论",
+                "poetryId": "3",
+                "userId": 3,
+                "praiseIds": "",
+                "addTime": 1556855218,
+                "nickName": "三行诗测试号",
+                "avatar": "http://b-ssl.duitang.com/uploads/item/201502/08/20150208012645_rRahK.jpeg"
+            }
+        ]
     }
 }
 ```
@@ -126,5 +139,24 @@ method:POST
     "errno": 1004,
     "errmsg": "分类已存在",
     "data": {}
+}
+```
+### <a name="6">评论三行诗</a>
+```
+url:/index/addComment
+method:POST
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| userId| 是 |   评论人ID   |
+| comment| 是 |   评论内容   |
+| poetryId| 是 |   三行诗ID   |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {
+        "id":4
+    }
 }
 ```
