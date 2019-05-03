@@ -5,6 +5,7 @@
 <a href="#4">获取诗歌分类</a><br/>
 <a href="#5">新增一个分类</a><br/>
 <a href="#6">新增一条评论</a><br/>
+<a href="#7">诗歌点赞</a><br/>
 
 ### <a name="1">发布三行诗</a>
 ```
@@ -48,16 +49,18 @@ method:GET
     "errmsg": "",
     "data": {
         "list": [
-            {
-                "id": 2,    
-                "title": "六月八日",    
-                "author": "武汉大学",   
-                "content": "螃蟹在剥我的壳，笔记本在写我。\r\n漫天的我落在枫叶上雪花上。\r\n而你在想我。",  
-                "createBy": "leiyun",   
-                "caeateTime": 1556464345,  
-                "tagId": 1,    
-                "remark": "也许世界颠覆，你才会想我吧" ,
-                "createUserId": 1
+           {
+                "id": 3,
+                "title": "六月八日",
+                "author": "佚名",
+                "content": "笔停，铃响\n一张试卷卷走了三年的时光\n谁回头问我，今天考完了，还要回班么？",
+                "createBy": "三行诗测试号",
+                "caeateTime": 1556772622,
+                "tagId": 1,
+                "remark": "唯美三行诗——现代美",
+                "praiseCount": 2,
+                "isPraise": 1,
+                "commentCount": 2
             }
         ],
         "total": 1      
@@ -158,5 +161,21 @@ method:POST
     "data": {
         "id":4
     }
+}
+```
+### <a name="7">点赞三行诗</a>
+```
+url:/index/praise
+method:POST
+```
+| 参数        | 是否必传  |  含义  |
+| --------   | -----:  | :----:  |
+| userId| 是 |   点赞人ID   |
+| poetryId| 是 |   三行诗ID   |
+```json
+{
+    "errno": 0,
+    "errmsg": "",
+    "data": {}
 }
 ```
